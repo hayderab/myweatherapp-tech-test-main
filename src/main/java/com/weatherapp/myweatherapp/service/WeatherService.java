@@ -20,6 +20,13 @@ public class WeatherService {
     return weatherRepo.getByCity(city);
   }
 
+ /**
+   * Compare daylight hours between two cities.
+   * @param city1 The first city.
+   * @param city2 The second city.
+   * @return A comparison result string.
+   */
+
   public String compareDaylight(String city1, String city2) {
     try {
       CityInfo cityInfo1 = forecastByCity(city1);
@@ -49,7 +56,14 @@ public class WeatherService {
     }
   }
 
-  public String checkRain(String city1, String city2) {
+
+ /**
+   * Check if it's currently raining in one or both cities.
+   * @param city1 The first city.
+   * @param city2 The second city.
+   * @return A rain status string.
+   */
+    public String checkRain(String city1, String city2) {
     try {
       CityInfo cityInfo1 = forecastByCity(city1);
       CityInfo cityInfo2 = forecastByCity(city2);
@@ -75,6 +89,7 @@ public class WeatherService {
     }
   }
 
+  // Calculate the number of daylight hours between sunrise and sunset
   private long calculateDaylightHours(String sunrise, String sunset) {
     try {
       SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
@@ -87,7 +102,7 @@ public class WeatherService {
       return 0;
     }
   }
-
+  // Check if it's currently raining in the given city
   private boolean isRaining(CityInfo cityInfo) {
     String conditions = cityInfo.getCurrentConditions().getConditions();
     return conditions.toLowerCase().contains("rain");
